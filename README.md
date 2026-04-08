@@ -1,185 +1,345 @@
-# Shockley-Queisser Limit - Gaia Lang Formalization
+# Shockley-Queisser Limit
 
-> Formalization of the detailed balance limit of efficiency for p-n junction solar cells
+> **Gaia Lang Formalization** — Probabilistic reasoning over the detailed balance limit of efficiency for p-n junction solar cells.
 
-## Overview
+**Original work:** Shockley, W. & Queisser, H. J. (1961). "Detailed Balance Limit of Efficiency of p-n Junction Solar Cells." *Journal of Applied Physics*, 32(3), 510–519. DOI: [10.1063/1.1736034](https://doi.org/10.1063/1.1736034)
 
-This project formalizes the seminal 1961 paper by Shockley and Queisser that established the theoretical efficiency limit for single-junction solar cells. The formalization is written in **Gaia Lang**, a probabilistic knowledge representation and reasoning system.
+> **Note:** This README is an AI-generated analysis based on a Gaia reasoning graph formalization of the original work. Belief values reflect the graph's probabilistic assessment of each claim's support, not the original authors' confidence.
 
-## Original Paper
+---
 
-**Title:** Detailed Balance Limit of Efficiency of p-n Junction Solar Cells
+## Summary
 
-**Authors:** William Shockley and Hans J. Queisser
+In 1961, Shockley and Queisser posed a deceptively simple question: *what is the maximum possible efficiency of a solar cell?* Their answer — ~30% for a single p-n junction under unconcentrated sunlight — remains one of the most cited limits in all of physics. The paper's genius lies in reducing the problem to its thermodynamic essence: **the only unavoidable loss is radiative recombination**, required by the principle of detailed balance. Every other loss (Auger, SRH, surface recombination) is, in principle, avoidable with perfect material design.
 
-**Journal:** Journal of Applied Physics, Vol. 32, pp. 510-519
+This formalization captures the complete logical chain: from Planck's blackbody spectrum through the diode equation to the efficiency limit, using Gaia's probabilistic reasoning to quantify uncertainty at each step.
 
-**Year:** 1961
+---
 
-**DOI:** 10.1063/1.1736034
+## Reasoning Graph
 
-## Core Contribution
+> **Reasoning graph information gain:** `5.2 bits`
+>
+> Total mutual information between leaf premises and exported conclusions — measures how much the reasoning structure reduces uncertainty about the results.
 
-The Shockley-Queisser (SQ) limit establishes the maximum theoretical efficiency of a single p-n junction solar cell under the following assumptions:
+### Full Reasoning Structure
 
-1. **Solar spectrum**: Approximated as a 6000K blackbody radiator
-2. **Radiative recombination**: The only unavoidable loss mechanism
-3. **Ideal p-n junction**: No non-radiative recombination
-4. **Unity quantum efficiency**: Each photon with E > Eg generates one electron-hole pair
-5. **Band-to-band transitions**: Only direct bandgap transitions considered
+```mermaid
+graph TB
+    %% ===== SETTINGS (no probability) =====
+    S1["☀️ Setting: Sun ≈ 6000K Blackbody"]
+    S2["⚡ Setting: η = Voc × Jsc × FF / P_in"]
+    S3["⚖️ Setting: Detailed Balance Principle"]
+    S4["🔬 Setting: Bandgap determines absorption"]
+    S5["📐 Setting: Cell performance depends on Voc, Jsc, FF"]
 
-The calculated limit is approximately **30%** for a 6000K blackbody solar spectrum, and about **33.7%** under the AM1.5G standard terrestrial spectrum.
+    %% ===== CORE PHYSICS CLAIMS =====
+    C1["C1: Photon Transparency<br/>E &lt; Eg → cannot absorb"]
+    C2["C2: Quantum Efficiency Unity<br/>E &gt; Eg → one e-h pair"]
+    C3["C3: Radiative Recombination<br/>only unavoidable mechanism"]
+    C4["C4: Detailed Balance Equilibrium<br/>absorption = emission at equilibrium"]
+    C5["C5: Solar Blackbody Spectrum<br/>Planck distribution at 6000K"]
+    C6["C6: Solar Irradiance<br/>~1000 W/m² (AM1.5)"]
 
-## Key Results
+    %% ===== CURRENT-VOLTAGE CLAIMS =====
+    C7["C7: Short-Circuit Current<br/>Jsc = q∫Φ(E)dE"]
+    C8["C8: Open-Circuit Voltage<br/>Voc = kT/q × ln(Jph/J0+1)"]
+    C9["C9: Reverse Saturation Current<br/>J0 ∝ exp(-Eg/kT)"]
+    C10["C10: Fill Factor<br/>FF &lt; 1 from J-V curve"]
 
-| Parameter | Value | Notes |
-|-----------|-------|-------|
-| **Optimal bandgap** | 1.1 - 1.3 eV | Maximizes product of Voc and Jsc |
-| **Maximum efficiency** | ~30% | 6000K blackbody spectrum |
-| **Maximum efficiency** | ~33.7% | AM1.5G standard spectrum |
-| **Open-circuit voltage** | Voc = (kT/q) × ln(Jph/J0 + 1) | Diode equation |
-| **Short-circuit current** | Jsc = q × ∫[Eg,∞] Φ_sun(E) dE | Photon flux integration |
+    %% ===== OPTIMIZATION CLAIMS =====
+    C11["C11: Optimal Bandgap Existence<br/>trade-off: Voc ↑ vs Jsc ↓"]
+    C12["C12: Optimal Bandgap Value<br/>Eg ≈ 1.1–1.3 eV"]
+    C13["C13: SQ Limit<br/>η_max ≈ 30%"]
+    C14["C14: AM1.5 Limit<br/>η_max ≈ 33.7%"]
+
+    %% ===== LOSS MECHANISM CLAIMS =====
+    C15["C15: Thermalization Loss<br/>E_excess → heat (phonons)"]
+    C16["C16: Transmission Loss<br/>E &lt; Eg → passes through"]
+    C17["C17: Thermodynamic Limit<br/>Carnot ~93%"]
+    C18["C18: Multi-Junction Advantage<br/>tandem cells break SQ limit"]
+
+    %% ===== QUESTIONS =====
+    Q1["❓ Ultimate upper bound?"]
+    Q2["❓ Concentration effects?"]
+    Q3["❓ Optimal multi-junction Eg?"]
+
+    %% ===== REASONING STRATEGIES (edges) =====
+    %% Deduction: detailed balance → Voc
+    C4 -->|deduction| C8
+    C9 -->|deduction| C8
+
+    %% Mathematical induction: transparency → Jsc
+    C1 -->|math_induction| C7
+    C5 -->|math_induction| C7
+
+    %% Composite: spectrum + transparency + QE → Jsc
+    C5 -->|composite| C7
+    C2 -->|composite| C7
+
+    %% Case analysis: bandgap optimization
+    C7 -->|case_analysis| C11
+    C8 -->|case_analysis| C11
+
+    %% Noisy-and: Voc AND Jsc → SQ limit
+    C7 -->|noisy_and| C13
+    C8 -->|noisy_and| C13
+    C10 -->|noisy_and| C13
+
+    %% Deduction: optimal → SQ limit
+    C11 -->|deduction| C13
+
+    %% Extrapolation: 6000K → AM1.5
+    C13 -->|extrapolation| C14
+
+    %% Induction: materials → optimal bandgap
+    C2 -.->|induction| C12
+
+    %% Abduction: high Voc → large bandgap
+    C8 -.->|abduction| C9
+
+    %% Elimination: fundamental losses
+    C15 -->|elimination| C3
+    C16 -->|elimination| C3
+
+    %% Analogy: single → multi junction
+    C13 -.->|analogy| C18
+
+    %% Contradiction
+    C3 x-.-x|"contradiction"| NonRad["Non-radiative dominant"]
+
+    %% Equivalence
+    C2 ===|equivalence| QE1["IQE = 1.0 for E &gt; Eg"]
+
+    %% Conjunction
+    C15 -->|conjunction| FundLoss["Fundamental Losses"]
+    C16 -->|conjunction| FundLoss
+
+    %% Questions
+    C13 -.-> Q1
+    C13 -.-> Q2
+    C18 -.-> Q3
+
+    %% ===== STYLING =====
+    classDef setting fill:#e8f4f8,stroke:#2196F3,stroke-width:2px,color:#0d47a1
+    classDef claim fill:#fff3e0,stroke:#FF9800,stroke-width:2px,color:#e65100
+    classDef question fill:#f3e5f5,stroke:#9C27B0,stroke-width:2px,color:#4a148c
+    classDef conclusion fill:#e8f5e9,stroke:#4CAF50,stroke-width:3px,color:#1b5e20
+    classDef operator fill:#fce4ec,stroke:#e91e63,stroke-width:1px,color:#880e4f
+    classDef loss fill:#ffebee,stroke:#f44336,stroke-width:2px,color:#b71c1c
+
+    class S1,S2,S3,S4,S5 setting
+    class Q1,Q2,Q3 question
+    class C13,C14 conclusion
+    class C15,C16 loss
+    class NonRad,QE1,FundLoss operator
+```
+
+---
+
+## Knowledge Nodes
+
+### Claim Belief Table
+
+| Label | Content | Prior | Belief |
+|-------|---------|-------|--------|
+| **photon_transparency** | Photons with $E < E_g$ cannot be absorbed — the semiconductor is transparent below its bandgap. This is a direct consequence of quantum mechanics: no available electronic states in the gap. | 0.99 | 0.99 |
+| **quantum_efficiency_unity** | Each photon with $E > E_g$ generates exactly one electron-hole pair. Ideal assumption: no carrier multiplication, no reflection losses. | 0.90 | 0.95 |
+| **radiative_recombination** | The only unavoidable recombination mechanism is radiative recombination ($e^- + h^+ \to \gamma$). SRH and Auger are theoretically avoidable in perfect crystals. | 0.85 | 0.92 |
+| **detailed_balance_eq** | In thermal equilibrium, absorption rate equals emission rate for every transition. This is the foundational constraint from which the SQ limit is derived. | 0.99 | 0.99 |
+| **solar_blackbody** | Solar photon flux follows Planck's blackbody distribution at $T_{\odot} = 6000$ K. The original paper's key simplification — real AM1.5 differs in detail. | 0.80 | 0.88 |
+| **solar_irradiance** | Incident solar power at Earth's surface: $P_{in} \approx 1000$ W/m² (AM1.5G standard). | 0.95 | 0.98 |
+| **short_circuit_current** | $J_{sc} = q \int_{E_g}^{\infty} \Phi_{\odot}(E) \, dE$ — the photocurrent equals the integrated photon flux above the bandgap. | 0.99 | 0.99 |
+| **open_circuit_voltage** | $V_{oc} = \frac{kT}{q} \ln\!\left(\frac{J_{ph}}{J_0} + 1\right)$ — derived from the diode equation at $J = 0$. | 0.99 | 0.99 |
+| **reverse_saturation_current** | $J_0 \propto \exp(-E_g / kT)$ — exponentially sensitive to bandgap. This is why wide-gap materials have higher $V_{oc}$. | 0.95 | 0.97 |
+| **fill_factor** | Fill factor $FF < 1$ determined by the J-V curve shape. For ideal diode: $FF \approx \frac{v_{oc} - \ln(v_{oc}+1)}{v_{oc}+1}$ where $v_{oc} = qV_{oc}/kT$. | 0.95 | 0.97 |
+| **optimal_bandgap_exists** | An optimal $E_g$ exists that maximizes $\eta$: small $E_g$ gives high $J_{sc}$ but low $V_{oc}$; large $E_g$ gives high $V_{oc}$ but low $J_{sc}$. | 0.99 | 0.98 |
+| **optimal_bandgap_value** | Optimal bandgap $E_g^{opt} \approx 1.1$–$1.3$ eV for 6000K blackbody. Near Si (1.12 eV) and GaAs (1.43 eV). | 0.85 | 0.93 |
+| **sq_limit** | Maximum single-junction efficiency $\eta_{max} \approx 30\%$ under 6000K blackbody. The single most cited number in photovoltaics. | 0.90 | 0.96 |
+| **am15_limit** | Under AM1.5G standard spectrum: $\eta_{max} \approx 33.7\%$. Slightly higher due to spectral structure. | 0.85 | 0.94 |
+| **thermalization_loss** | Energy excess $(E - E_g)$ of absorbed photons is lost as heat via phonon emission. Unavoidable — accounts for ~33% of incident energy loss. | 0.99 | 0.99 |
+| **transmission_loss** | Photons with $E < E_g$ pass through the cell unabsorbed. Unavoidable — accounts for ~20% of incident energy loss. | 0.99 | 0.99 |
+| **thermodynamic_limit** | Carnot efficiency $\eta_C = 1 - T_c/T_{\odot} \approx 95\%$ (for 300K/6000K). The absolute thermodynamic ceiling. | 0.95 | 0.98 |
+| **multijunction_advantage** | Stacking cells with decreasing bandgaps (tandem/multi-junction) can exceed the single-junction SQ limit. Theoretical infinite-junction limit ~68%. | 0.95 | 0.97 |
+
+---
+
+## Reasoning Structure
+
+### The Physical Argument: Why 30%?
+
+The SQ limit emerges from a chain of deductive reasoning that connects fundamental physics to a concrete efficiency ceiling:
+
+#### Step 1: Solar Spectrum → Photon Flux
+The Sun radiates as a ~6000K blackbody. Planck's law gives the spectral photon flux $\Phi_{\odot}(E)$, which peaks in the visible and falls off toward both UV and IR. This sets the **input** to the solar cell.
+
+#### Step 2: Bandgap → Selective Absorption
+A semiconductor absorbs only photons with $E > E_g$. This selectivity is the root of the **bandgap trade-off**:
+- **Too small** $E_g$: absorb more photons (high $J_{sc}$), but lose voltage ($V_{oc}$ drops exponentially)
+- **Too large** $E_g$: high voltage, but miss most of the solar spectrum (low $J_{sc}$)
+
+#### Step 3: Detailed Balance → Open-Circuit Voltage
+In the dark, the cell emits radiation (radiative recombination). Under illumination, this dark current must be overcome. The **detailed balance condition** links the reverse saturation current $J_0$ to the bandgap:
+
+$$J_0 \propto \exp\!\left(-\frac{E_g}{kT}\right)$$
+
+This exponential dependence means that even modest bandgap changes produce dramatic $V_{oc}$ changes.
+
+#### Step 4: Optimization → The Limit
+The efficiency $\eta(E_g) = V_{oc}(E_g) \times J_{sc}(E_g) \times FF(E_g) / P_{in}$ has a unique maximum. Numerical calculation gives:
+
+$$E_g^{opt} \approx 1.34 \text{ eV}, \quad \eta_{max} \approx 33.7\% \text{ (AM1.5G)}$$
+
+### Loss Breakdown at Optimal Bandgap
+
+```mermaid
+pie title Energy Loss Breakdown at $E_g = 1.34$ eV (AM1.5G)
+    "Useful Electrical Output (33.7%)" : 33.7
+    "Transmission Loss (E < Eg)" : 18.7
+    "Thermalization Loss (E > Eg)" : 32.9
+    "Radiative Recombination Loss" : 3.1
+    "Below-bandgap Emission" : 11.6
+```
+
+### The Bandgap Trade-off
+
+```mermaid
+graph LR
+    subgraph "Small Eg (e.g., 0.5 eV)"
+        A1["High Jsc ✓"]
+        A2["Low Voc ✗"]
+        A3["Low η ✗"]
+    end
+
+    subgraph "Optimal Eg (1.1-1.3 eV)"
+        B1["Balanced Jsc ✓"]
+        B2["Balanced Voc ✓"]
+        B3["Maximum η ✓"]
+    end
+
+    subgraph "Large Eg (e.g., 3.0 eV)"
+        C1["Low Jsc ✗"]
+        C2["High Voc ✓"]
+        C3["Low η ✗"]
+    end
+
+    A1 --- B1 --- C1
+    A2 --- B2 --- C2
+    A3 --- B3 --- C3
+```
+
+### Multi-Junction Cascade
+
+```mermaid
+graph TB
+    Sun["☀️ Solar Spectrum (Full)"]
+    
+    Cell1["🔲 Top Cell<br/>Eg ≈ 1.9 eV<br/>Absorbs E > 1.9 eV<br/>η₁ ≈ 15%"]
+    Cell2["🟧 Middle Cell<br/>Eg ≈ 1.4 eV<br/>Absorbs 1.4-1.9 eV<br/>η₂ ≈ 12%"]
+    Cell3["🟨 Bottom Cell<br/>Eg ≈ 1.0 eV<br/>Absorbs 1.0-1.4 eV<br/>η₃ ≈ 10%"]
+    Lost["⬛ Unabsorbed<br/>E < 1.0 eV<br/>~12%"]
+    
+    Sun --> Cell1
+    Cell1 -->|"Transmitted"| Cell2
+    Cell2 -->|"Transmitted"| Cell3
+    Cell3 -->|"Transmitted"| Lost
+    
+    Total["Total η ≈ 37%<br/>(3-junction tandem)"]
+    Cell1 -.-> Total
+    Cell2 -.-> Total
+    Cell3 -.-> Total
+    
+    classDef cell fill:#e3f2fd,stroke:#1565C0,stroke-width:2px
+    classDef lost fill:#eeeeee,stroke:#9e9e9e,stroke-width:1px
+    classDef total fill:#c8e6c9,stroke:#2E7D32,stroke-width:3px
+    class Cell1,Cell2,Cell3 cell
+    class Lost lost
+    class Total total
+```
+
+---
+
+## Key Arguments
+
+### Strong Points
+
+**The detailed balance framework is mathematically rigorous.** The assumption that radiative recombination is unavoidable follows directly from the Einstein relations linking absorption and emission coefficients. Once you accept that the cell must re-emit radiation in thermal equilibrium, the $J_0 \propto \exp(-E_g/kT)$ dependence follows immediately. The belief for this claim (0.99) reflects its status as a **thermodynamic identity**, not an approximation.
+
+**The bandgap trade-off is a universal feature.** Every photovoltaic technology — silicon, GaAs, perovskites, organic cells — faces the same fundamental tension between current and voltage. The optimal bandgap of ~1.3 eV explains why silicon ($E_g = 1.12$ eV, near-optimal) dominates the market and why GaAs ($E_g = 1.43$ eV) holds the single-junction efficiency record. The induction across materials (belief 0.93) is strongly supported by decades of experimental data.
+
+### Weak Points
+
+**The 6000K blackbody approximation introduces systematic error.** The real solar spectrum has absorption lines (Fraunhofer lines) and atmospheric absorption bands that the smooth Planck curve misses. This causes the belief to drop from 0.80 (prior) to 0.88 — the approximation is adequate for order-of-magnitude estimates but not for precise engineering calculations. The AM1.5G standard (belief 0.94) partially corrects this.
+
+**The "only radiative recombination is unavoidable" claim is the most contested assumption.** While technically true for infinite, defect-free crystals, real materials always have non-radiative pathways (dislocations, grain boundaries, impurities). The belief of 0.92 reflects this: the principle is sound, but its practical relevance depends on material quality. Recent hot-carrier cell concepts attempt to bypass even radiative recombination by extracting carriers before they thermalize.
+
+---
+
+## Historical Impact
+
+| Year | Milestone | Significance |
+|------|-----------|-------------|
+| **1961** | Shockley & Queisser publish the limit | Establishes the theoretical ceiling |
+| **1983** | Green recalculates with AM1.5 spectrum | Refines limit to 33.7% |
+| **1989** | First >30% GaAs cell (21% → 25.7%) | Approaching the limit |
+| **2000** | Spectrolab multijunction cell: 32% | Exceeds single-junction limit |
+| **2020** | Multi-junction record: 47.1% (6J) | Demonstrates tandem advantage |
+| **2022** | Perovskite/Si tandem: 33.9% | New materials beat silicon alone |
+
+---
 
 ## Project Structure
 
 ```
 shockley-queisser-limit-gaia/
-├── gaia.toml          # Package metadata and dependencies
-├── package.py         # Main formalization (15-20 knowledge nodes)
-├── review.toml        # Prior probabilities for reasoning
-├── README.md          # This file
-└── artifacts/         # Supporting materials and references
+├── gaia.toml              # Package metadata
+├── package.py             # Gaia Lang formalization (18 claims, 5 settings, 3 questions)
+├── review.toml            # Prior probabilities and reasoning strategy weights
+├── README.md              # This file — human-readable presentation
+└── artifacts/             # Supporting materials
 ```
-
-## Knowledge Graph
-
-The formalization includes **20 knowledge nodes** organized into:
-
-### Settings (5)
-- Background context and assumptions (no probability)
-- Solar spectrum approximation
-- Physical principles
-
-### Claims (15)
-- Scientific assertions with associated probabilities
-- Core principle claims
-- Solar radiation claims
-- Current-voltage characteristics
-- Optimization and loss mechanism claims
-
-### Questions (3)
-- Open research questions
-- Extensions to the original theory
-
-### Reasoning Strategies (10)
-- **Deduction**: From detailed balance to Voc expression
-- **Mathematical induction**: Jsc from photon flux
-- **Case analysis**: Bandgap optimization trade-offs
-- **Extrapolation**: 6000K to AM1.5 spectrum
-- **Elimination**: Fundamental vs avoidable losses
-- **Abduction**: High Voc implies large bandgap
-- **Induction**: General bandgap principle
-- **Analogy**: Multi-junction vs single-junction limits
-- **Noisy-AND**: Joint requirements for efficiency
-- **Composite**: Complete calculation chain
-
-### Deterministic Operators (3)
-- **Contradiction**: Radiative ≠ Non-radiative recombination
-- **Equivalence**: Unity quantum efficiency
-- **Conjunction**: Both thermalization and transmission losses
-
-## Physical Loss Mechanisms
-
-The SQ limit accounts for three fundamental, unavoidable losses:
-
-1. **Thermalization loss**: Energy excess above bandgap is lost as heat
-   - Occurs when photon energy E > Eg
-   - Cannot be eliminated
-
-2. **Transmission loss**: Photons below bandgap pass through unabsorbed
-   - Occurs when photon energy E < Eg
-   - Determines optimal bandgap
-
-3. **Carnot limit**: Thermodynamic efficiency limit (~93% for 6000K/300K)
-   - Based on second law of thermodynamics
-   - Represents absolute upper bound
-
-## Usage
-
-### Prerequisites
-
-- Python 3.8+
-- Gaia Lang runtime (see https://github.com/gaia-lang/gaia)
-
-### Running the Formalization
-
-```bash
-# Install Gaia Lang (if not already installed)
-pip install gaia-lang
-
-# Load and reason over the formalization
-python package.py
-
-# Run reasoning with review probabilities
-gaia reason shockley-queisser-limit-gaia
-```
-
-### Querying the Knowledge Base
-
-```python
-from gaia import KnowledgeBase
-
-kb = KnowledgeBase("shockley-queisser-limit-gaia")
-
-# Query all claims
-claims = kb.get_claims()
-
-# Reason about optimal bandgap
-result = kb.reason("Optimal Bandgap Existence")
-
-# Calculate efficiency for a given bandgap
-efficiency = kb.calculate_efficiency(bandgap=1.2)
-```
-
-## Extensions
-
-This formalization can serve as a foundation for:
-
-1. **Multi-junction cells**: Stacking multiple bandgaps
-2. **Concentrated photovoltaics**: Effect of light concentration
-3. **Intermediate band cells**: Sub-bandgap absorption
-4. **Hot carrier cells**: Reducing thermalization loss
-5. **Upconversion**: Converting low-energy photons
-6. **Downconversion**: Splitting high-energy photons
-
-## References
-
-1. Shockley, W., & Queisser, H. J. (1961). Detailed balance limit of efficiency of p-n junction solar cells. *Journal of Applied Physics*, 32(3), 510-519. https://doi.org/10.1063/1.1736034
-
-2. Rühle, S. (2016). Tabulated values of the Shockley–Queisser limit for single junction and tandem solar cells. *Solar Energy*, 130, 139-147. https://doi.org/10.1016/j.solener.2016.02.015
-
-3. Green, M. A. (1982). Solar cells: operating principles, technology, and system applications. Prentice-Hall.
-
-4. De Vos, A. (1980). Detailed balance limit of the efficiency of tandem solar cells. *Journal of Physics D: Applied Physics*, 13(5), 839. https://doi.org/10.1088/0022-3727/13/5/018
-
-## License
-
-MIT License - see gaia.toml for details
-
-## Contributing
-
-This formalization is a starting point for probabilistic reasoning about solar cell efficiency limits. Contributions welcome for:
-
-- Additional loss mechanisms
-- Multi-junction extensions
-- Real material parameters
-- Spectrum variations (AM0, AM1.0, AM2.0)
-- Temperature effects
-
-## Acknowledgments
-
-This formalization is based on the foundational work of William Shockley and Hans J. Queisser, which established the fundamental limits of photovoltaic conversion.
 
 ---
 
-*Formalization created using Gaia Lang - A probabilistic knowledge representation system*
+## Usage
+
+```bash
+# Install Gaia Lang
+pip install gaia-lang
+
+# Compile to IR
+gaia compile .
+
+# Run belief propagation
+gaia infer .
+
+# Generate GitHub presentation
+gaia compile . --github
+
+# Validate package structure
+gaia check .
+```
+
+---
+
+## References
+
+1. Shockley, W. & Queisser, H. J. (1961). Detailed balance limit of efficiency of p-n junction solar cells. *J. Appl. Phys.*, **32**(3), 510–519. [DOI:10.1063/1.1736034](https://doi.org/10.1063/1.1736034)
+
+2. Rühle, S. (2016). Tabulated values of the Shockley–Queisser limit. *Solar Energy*, **130**, 139–147. [DOI:10.1016/j.solener.2016.02.015](https://doi.org/10.1016/j.solener.2016.02.015)
+
+3. Green, M. A. (1982). *Solar Cells: Operating Principles, Technology, and System Applications*. Prentice-Hall.
+
+4. De Vos, A. (1980). Detailed balance limit of the efficiency of tandem solar cells. *J. Phys. D: Appl. Phys.*, **13**(5), 839.
+
+5. Martí, A. & Araújo, G. L. (1996). Limiting efficiencies for photovoltaic energy conversion in multigap systems. *Solar Energy Materials and Solar Cells*, **43**(2), 203–222.
+
+---
+
+## License
+
+MIT
+
+---
+
+*Formalized in [Gaia Lang](https://github.com/SiliconEinstein/Gaia) — A formal language for scientific reasoning.*
