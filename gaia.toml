@@ -1,0 +1,8 @@
+[package]
+name = "ShockleyQueisserLimit"
+version = "0.1.0"
+description = "Formalization of the Shockley-Queisser detailed balance limit for solar cell efficiency (1961)"
+authors = ["Shockley & Queisser Formalization"]
+license = "MIT"
+
+[dependencies]
