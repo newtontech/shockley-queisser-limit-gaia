@@ -141,26 +141,26 @@ graph TB
 
 ### Claim Belief Table
 
-| Label | Content | Prior | Belief |
-|-------|---------|-------|--------|
-| **photon_transparency** | Photons with $E < E_g$ cannot be absorbed — the semiconductor is transparent below its bandgap. This is a direct consequence of quantum mechanics: no available electronic states in the gap. | 0.99 | 0.99 |
-| **quantum_efficiency_unity** | Each photon with $E > E_g$ generates exactly one electron-hole pair. Ideal assumption: no carrier multiplication, no reflection losses. | 0.90 | 0.95 |
-| **radiative_recombination** | The only unavoidable recombination mechanism is radiative recombination ($e^- + h^+ \to \gamma$). SRH and Auger are theoretically avoidable in perfect crystals. | 0.85 | 0.92 |
-| **detailed_balance_eq** | In thermal equilibrium, absorption rate equals emission rate for every transition. This is the foundational constraint from which the SQ limit is derived. | 0.99 | 0.99 |
-| **solar_blackbody** | Solar photon flux follows Planck's blackbody distribution at $T_{\odot} = 6000$ K. The original paper's key simplification — real AM1.5 differs in detail. | 0.80 | 0.88 |
-| **solar_irradiance** | Incident solar power at Earth's surface: $P_{in} \approx 1000$ W/m² (AM1.5G standard). | 0.95 | 0.98 |
-| **short_circuit_current** | $J_{sc} = q \int_{E_g}^{\infty} \Phi_{\odot}(E) \, dE$ — the photocurrent equals the integrated photon flux above the bandgap. | 0.99 | 0.99 |
-| **open_circuit_voltage** | $V_{oc} = \frac{kT}{q} \ln\!\left(\frac{J_{ph}}{J_0} + 1\right)$ — derived from the diode equation at $J = 0$. | 0.99 | 0.99 |
-| **reverse_saturation_current** | $J_0 \propto \exp(-E_g / kT)$ — exponentially sensitive to bandgap. This is why wide-gap materials have higher $V_{oc}$. | 0.95 | 0.97 |
-| **fill_factor** | Fill factor $FF < 1$ determined by the J-V curve shape. For ideal diode: $FF \approx \frac{v_{oc} - \ln(v_{oc}+1)}{v_{oc}+1}$ where $v_{oc} = qV_{oc}/kT$. | 0.95 | 0.97 |
-| **optimal_bandgap_exists** | An optimal $E_g$ exists that maximizes $\eta$: small $E_g$ gives high $J_{sc}$ but low $V_{oc}$; large $E_g$ gives high $V_{oc}$ but low $J_{sc}$. | 0.99 | 0.98 |
-| **optimal_bandgap_value** | Optimal bandgap $E_g^{opt} \approx 1.1$–$1.3$ eV for 6000K blackbody. Near Si (1.12 eV) and GaAs (1.43 eV). | 0.85 | 0.93 |
-| **sq_limit** | Maximum single-junction efficiency $\eta_{max} \approx 30\%$ under 6000K blackbody. The single most cited number in photovoltaics. | 0.90 | 0.96 |
-| **am15_limit** | Under AM1.5G standard spectrum: $\eta_{max} \approx 33.7\%$. Slightly higher due to spectral structure. | 0.85 | 0.94 |
-| **thermalization_loss** | Energy excess $(E - E_g)$ of absorbed photons is lost as heat via phonon emission. Unavoidable — accounts for ~33% of incident energy loss. | 0.99 | 0.99 |
-| **transmission_loss** | Photons with $E < E_g$ pass through the cell unabsorbed. Unavoidable — accounts for ~20% of incident energy loss. | 0.99 | 0.99 |
-| **thermodynamic_limit** | Carnot efficiency $\eta_C = 1 - T_c/T_{\odot} \approx 95\%$ (for 300K/6000K). The absolute thermodynamic ceiling. | 0.95 | 0.98 |
-| **multijunction_advantage** | Stacking cells with decreasing bandgaps (tandem/multi-junction) can exceed the single-junction SQ limit. Theoretical infinite-junction limit ~68%. | 0.95 | 0.97 |
+| Label | Content | Prior | Belief | Reasoning Path |
+|-------|---------|-------|--------|---------------|
+| **photon_transparency** | Photons with $E < E_g$ cannot be absorbed — the semiconductor is transparent below its bandgap. No available electronic states in the gap. | 0.50 | 0.50 | 🍃 Leaf node — no upstream premises |
+| **quantum_efficiency_unity** | Each photon with $E > E_g$ generates exactly one electron-hole pair. Ideal assumption: no carrier multiplication. | 0.50 | 0.50 | 🍃 Leaf node — ideal assumption, unprovable by internal reasoning |
+| **radiative_recombination** | The only unavoidable recombination mechanism is radiative recombination ($e^- + h^+ \to \gamma$). | 0.50 | 0.72 | 🔗 elimination from Thermalization + Transmission → supports this as fundamental |
+| **detailed_balance_eq** | In thermal equilibrium, absorption rate equals emission rate for every transition. Foundational constraint. | 0.50 | 0.50 | 🍃 Leaf node — foundational axiom of the theory |
+| **solar_blackbody** | Solar photon flux follows Planck's blackbody distribution at $T_{\odot} = 6000$ K. | 0.50 | 0.50 | 🍃 Leaf node — external empirical input |
+| **solar_irradiance** | Incident solar power at Earth's surface: $P_{in} \approx 1000$ W/m² (AM1.5G standard). | 0.50 | 0.50 | 🍃 Leaf node — measurement fact |
+| **reverse_saturation_current** | $J_0 \propto \exp(-E_g / kT)$ — exponentially sensitive to bandgap. | 0.50 | 0.50 | 🍃 Leaf node — derived from semiconductor statistics (external) |
+| **short_circuit_current** | $J_{sc} = q \int_{E_g}^{\infty} \Phi_{\odot}(E) \, dE$ — photocurrent equals integrated photon flux above bandgap. | 0.50 | 0.68 | 🔗 composite(Solar Blackbody, Photon Transparency, QE Unity) + mathematical_induction(Photon Transparency) |
+| **open_circuit_voltage** | $V_{oc} = \frac{kT}{q} \ln\!\left(\frac{J_{ph}}{J_0} + 1\right)$ — diode equation at $J = 0$. | 0.50 | 0.68 | 🔗 deduction(Detailed Balance Eq, Reverse Saturation Current) — strong logical chain |
+| **fill_factor** | Fill factor $FF < 1$ determined by the J-V curve shape. $FF \approx \frac{v_{oc} - \ln(v_{oc}+1)}{v_{oc}+1}$. | 0.50 | 0.50 | 🍃 Leaf node — follows from diode equation (external) |
+| **optimal_bandgap_exists** | An optimal $E_g$ exists that maximizes $\eta$: small $E_g$ → high $J_{sc}$/low $V_{oc}$; large $E_g$ → low $J_{sc}$/high $V_{oc}$. | 0.50 | 0.79 | 🔗 case_analysis(exhaustive: Eg→0, Eg→∞, Eg≈1.2eV) + infer(J0, Voc, Jsc) — strong multi-path support |
+| **optimal_bandgap_value** | Optimal bandgap $E_g^{opt} \approx 1.1$–$1.3$ eV for 6000K blackbody. Near Si (1.12 eV) and GaAs (1.43 eV). | 0.50 | 0.66 | 🔗 induction(Si 26%, GaAs 29%, CdTe 22%) — moderate: empirical generalization from 3 materials |
+| **sq_limit** | Maximum single-junction efficiency $\eta_{max} \approx 30\%$ under 6000K blackbody. | 0.50 | 0.75 | 🔗 noisy_and(Voc, Jsc, FF) + deduction(Optimal Bandgap Exists) — requires all three simultaneously |
+| **am15_limit** | Under AM1.5G standard spectrum: $\eta_{max} \approx 33.7\%$. | 0.50 | 0.65 | 🔗 extrapolation(SQ Limit 6000K → AM1.5) — weaker: cross-spectrum generalization |
+| **thermalization_loss** | Energy excess $(E - E_g)$ of absorbed photons is lost as heat via phonon emission. | 0.50 | 0.50 | 🍃 Leaf node — fundamental physics (irreversible energy dissipation) |
+| **transmission_loss** | Photons with $E < E_g$ pass through the cell unabsorbed. | 0.50 | 0.50 | 🍃 Leaf node — direct consequence of photon transparency |
+| **thermodynamic_limit** | Carnot efficiency $\eta_C = 1 - T_c/T_{\odot} \approx 95\%$ (for 300K/6000K). Absolute ceiling. | 0.50 | 0.50 | 🍃 Leaf node — second law of thermodynamics |
+| **multijunction_advantage** | Stacking cells with different bandgaps (tandem) can exceed the single-junction SQ limit. Infinite-junction limit ~68%. | 0.50 | 0.62 | 🔗 analogy(Single-junction → Multi-junction via thermodynamic cascade) — weaker: analogical reasoning |
 
 ---
 
@@ -263,15 +263,17 @@ graph TB
 
 ### Strong Points
 
-**The detailed balance framework is mathematically rigorous.** The assumption that radiative recombination is unavoidable follows directly from the Einstein relations linking absorption and emission coefficients. Once you accept that the cell must re-emit radiation in thermal equilibrium, the $J_0 \propto \exp(-E_g/kT)$ dependence follows immediately. The belief for this claim (0.99) reflects its status as a **thermodynamic identity**, not an approximation.
+**Deductive chains produce the largest belief gains.** The deduction from detailed balance equilibrium + reverse saturation current → open-circuit voltage boosts belief from 0.50 (both leaves) to 0.68. This is the strongest single-step inference in the graph — it reflects the mathematical rigor of deriving $V_{oc}$ from the diode equation. Similarly, the case analysis for optimal bandgap existence (exhaustive: $E_g \to 0$, $E_g \to \infty$, $E_g \approx 1.2$ eV) achieves belief 0.79 — the highest in the entire graph — because exhaustive case coverage is one of Gaia's strongest strategies.
 
-**The bandgap trade-off is a universal feature.** Every photovoltaic technology — silicon, GaAs, perovskites, organic cells — faces the same fundamental tension between current and voltage. The optimal bandgap of ~1.3 eV explains why silicon ($E_g = 1.12$ eV, near-optimal) dominates the market and why GaAs ($E_g = 1.43$ eV) holds the single-junction efficiency record. The induction across materials (belief 0.93) is strongly supported by decades of experimental data.
+**Multi-path support amplifies certainty.** Short-circuit current is supported by two independent reasoning paths: composite reasoning (spectrum + transparency + QE) and mathematical induction (from transparency). Both converge on the same conclusion, pushing belief to 0.68. The SQ limit itself benefits from noisy-and (requiring Voc, Jsc, and FF simultaneously) plus deduction from optimal bandgap existence — multiple angles on the same result.
 
 ### Weak Points
 
-**The 6000K blackbody approximation introduces systematic error.** The real solar spectrum has absorption lines (Fraunhofer lines) and atmospheric absorption bands that the smooth Planck curve misses. This causes the belief to drop from 0.80 (prior) to 0.88 — the approximation is adequate for order-of-magnitude estimates but not for precise engineering calculations. The AM1.5G standard (belief 0.94) partially corrects this.
+**Leaf nodes cannot bootstrap themselves.** Five core claims — detailed balance equilibrium, solar blackbody spectrum, photon transparency, quantum efficiency unity, and solar irradiance — remain at belief 0.50 because they have no upstream premises in the graph. They are axioms or external inputs. This is by design (Gaia distinguishes internal reasoning from external evidence), but it means the entire structure's certainty is bottlenecked by these unprovable foundations. Adding `provenance`-linked claims from experimental physics (e.g., spectroscopy measurements confirming Planck's law) would lift these leaves.
 
-**The "only radiative recombination is unavoidable" claim is the most contested assumption.** While technically true for infinite, defect-free crystals, real materials always have non-radiative pathways (dislocations, grain boundaries, impurities). The belief of 0.92 reflects this: the principle is sound, but its practical relevance depends on material quality. Recent hot-carrier cell concepts attempt to bypass even radiative recombination by extracting carriers before they thermalize.
+**Analogical reasoning for multi-junction cells is the weakest link.** The multi-junction advantage (belief 0.62) relies solely on analogy to thermodynamic cascades — the weakest strategy in Gaia's hierarchy. Belief barely rises above the 0.50 prior. To strengthen this, one would need: (1) explicit deduction from the detailed balance calculation applied to each sub-cell, or (2) induction from actual multi-junction efficiency records (GaInP/GaAs/Ge: 32.9%, perovskite/Si: 33.9%).
+
+**The extrapolation to AM1.5 is uncertain.** Going from 6000K blackbody (0.50) to AM1.5 (0.65) via extrapolation reflects genuine uncertainty — the AM1.5 spectrum has absorption bands and Fraunhofer lines that the smooth Planck curve doesn't capture. The belief increase is modest because cross-domain extrapolation is inherently riskier than within-domain deduction.
 
 ---
 
