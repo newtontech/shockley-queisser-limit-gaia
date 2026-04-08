@@ -1,49 +1,42 @@
 # Review.toml - Prior Probabilities for Shockley-Queisser Limit Formalization
-# These probabilities represent the confidence in each claim before reasoning
+# All priors set to 0.5 (maximum uncertainty) — beliefs derived purely from reasoning structure
 
 [claims]
 
-# Core principle claims (high confidence - well-established physics)
-"Photon Transparency Condition" = 0.99
-"Quantum Efficiency Unity" = 0.90  # Ideal assumption, not always true in practice
-"Radiative Recombination Dominance" = 0.85  # Good approximation for high-quality materials
-"Detailed Balance Equilibrium" = 0.99
+# Core principle claims
+"Photon Transparency Condition" = 0.50
+"Quantum Efficiency Unity" = 0.50
+"Radiative Recombination Dominance" = 0.50
+"Detailed Balance Equilibrium" = 0.50
 
-# Solar radiation claims (high confidence)
-"Solar Blackbody Spectrum" = 0.80  # Approximation, real Sun is not perfect blackbody
-"Solar Irradiance" = 0.95  # Standard test condition, well-established
+# Solar radiation claims
+"Solar Blackbody Spectrum" = 0.50
+"Solar Irradiance" = 0.50
 
-# Current-voltage characteristics claims (high confidence)
-"Short-Circuit Current" = 0.99
-"Open-Circuit Voltage" = 0.99
-"Reverse Saturation Current" = 0.95
-"Fill Factor Limit" = 0.95
+# Current-voltage characteristics claims
+"Short-Circuit Current" = 0.50
+"Open-Circuit Voltage" = 0.50
+"Reverse Saturation Current" = 0.50
+"Fill Factor Limit" = 0.50
 
-# Optimization claims (moderate confidence - depends on assumptions)
-"Optimal Bandgap Existence" = 0.99
-"Optimal Bandgap Value" = 0.85  # Depends on spectrum approximation
-"Shockley-Queisser Limit" = 0.90  # Well-established theoretical limit
-"AM1.5 Efficiency Limit" = 0.85  # Depends on spectrum details
+# Optimization claims
+"Optimal Bandgap Existence" = 0.50
+"Optimal Bandgap Value" = 0.50
+"Shockley-Queisser Limit" = 0.50
+"AM1.5 Efficiency Limit" = 0.50
 
-# Loss mechanisms (high confidence - fundamental physics)
-"Thermalization Loss" = 0.99
-"Transmission Loss" = 0.99
-"Thermodynamic Limit" = 0.95
+# Loss mechanisms
+"Thermalization Loss" = 0.50
+"Transmission Loss" = 0.50
+"Thermodynamic Limit" = 0.50
 
-# Multi-junction claims (high confidence - experimentally verified)
-"Multi-Junction Advantage" = 0.95
+# Multi-junction claims
+"Multi-Junction Advantage" = 0.50
 
 [reasoning_strategies]
 
-# Confidence in reasoning chains
-"Optimal Bandgap Existence_from_case_analysis" = 0.90
-"Shockley-Queisser Limit_from_deduction" = 0.85
-"AM1.5 Efficiency Limit_from_extrapolation" = 0.80
-"Optimal Bandgap Value_from_optimization" = 0.85
-
-[settings]
-
-# Settings don't have probabilities but can have weights
-"sun_temperature_approximation" = 0.80
-"quantum_efficiency_unity_assumption" = 0.90
-"detailed_balance_validity" = 0.99
+# Strategy confidence weights
+"Optimal Bandgap Existence_from_case_analysis" = 0.50
+"Shockley-Queisser Limit_from_deduction" = 0.50
+"AM1.5 Efficiency Limit_from_extrapolation" = 0.50
+"Optimal Bandgap Value_from_optimization" = 0.50
